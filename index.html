@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/moon.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css" />
+    <link
+      rel="stylesheet"
+      href="node_modules/highlight.js/styles/default.css"
+    />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section class="center">
+          <h1 style="font-size: 64px">Webpack Asset Management</h1>
+          <p style="font-size: 32px">Fernando José de Almeida</p>
+        </section>
+        <section>
+          <h1 style="font-size: 64px">
+            1&nbsp&nbsp
+            <span style="font-style: italic"
+              >O que são Loaders do Webpack?</span
+            >
+          </h1>
+          <ul>
+            <li class="fragment" style="margin-bottom: 24px">
+              São transformações aplicadas no código fonte de um módulo
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              Permitem gerenciar arquivos que não são JavaScript
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              Transforma esses diferentes arquivos em módulos válidos que o
+              webpack consegue compreender
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              Podemos assim quebrar todo o código para melhor organização
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h1 style="font-size: 64px">
+            2&nbsp&nbsp
+            <span style="font-style: italic">CSS Loader e Style Loader</span>
+          </h1>
+          <ul>
+            <li class="fragment" style="margin-bottom: 24px">
+              Loaders que permitem o uso de código css por meio de imports
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              <pre
+                class="language-shell"
+              ><code class="language-shell">$ npm install -D css-loader style-loader</code></pre>
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              <pre
+                class="language-javascript"
+              ><code class="language-javascript">module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+};</code></pre>
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              <pre
+                class="language-javascript"
+              ><code class="language-javascript">import "./styles/styles.css"</code></pre>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h1 style="font-size: 64px">
+            3&nbsp&nbsp
+            <span style="font-style: italic"
+              >O que é o Image Loader e como usá-lo?</span
+            >
+          </h1>
+          <ul>
+            <li class="fragment" style="margin-bottom: 24px">
+              O webpack 5 introduziu os "Asset Modules"
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              São módulos embutidos que permitem o uso de imagens, fontes, etc
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              Não é necessário instalar loaders adicionais
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              <pre
+                class="language-javascript"
+              ><code class="language-javascript">{
+  test: /\.(png|svg|jpg|jpeg|gif)$/i,
+  type: 'asset/resource',
+},</code></pre>
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              <pre
+                class="language-javascript"
+              ><code class="language-javascript">import MyImage from './my-image.png'</code></pre>
+            </li>
+            <li class="fragment" style="margin-bottom: 24px">
+              <pre
+                class="language-html"
+              ><code class="language-html"><img src="./my-image.0c61159.png" />
+              </code></pre>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
+
+<!-- <section>
+	<section data-transition-speed="slow">
+		<h1 style="font-size: 64px;">4 <span style="font-style: italic;">Strict mode</span></h1>
+		<ul style="width: 750px;">
+			<li class="fragment" style="margin-bottom: 24px;">Pode ser invocado utilizando <span style="font-style: italic;">"use strict"</span></li>
+			<li class="fragment" style="margin-bottom: 24px;">Foi introduzido na ES5</li>
+			<li class="fragment" style="margin-bottom: 24px;">Garante a criação de códigos mais seguros</li>
+			<li class="fragment" style="margin-bottom: 24px;">Lança erros em situações que o JavaScript não o faz</li>
+			<li class="fragment" style="margin-bottom: 24px;">Previne alguns erros de sintaxe</li>
+		</ul>
+	</section>
+	<section data-transition-speed="slow">
+		<h1 style="font-size: 64px;">4 <span style="font-style: italic;">Strict mode</span></h1>
+		<ul style="width: 750px;">
+			<li class="fragment" style="margin-bottom: 24px;">
+				<p>Exemplos:</p>
+				<pre><code class="hljs js" data-trim contenteditable data-noescape>
+					"use strict"
+					//Atribuição a variável não declarada
+					teste = 'olá';
+					//Duplicação de parâmetros
+					function exibeValor(x, x){
+						console.log("1º valor: " + x);
+						console.log("2º valor: " + y);
+					}
+					exibeValor(1,2);
+				</code></pre>
+			</li>
+		</ul>
+	</section>
+</section> -->
