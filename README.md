@@ -1,4 +1,4 @@
-# Presentation of ending module 2 bootcamp course
+# Webpack Asset Management Presentation
 Presentation using the framework reveal.js
 
 This program is a presentation using the [reveal.js](http://lab.hakim.se/reveal-js/#/) framework. It's my first presentation using this technology, so it's a very simple project.
